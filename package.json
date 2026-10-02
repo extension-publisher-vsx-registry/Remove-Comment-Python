@@ -1,0 +1,87 @@
+{
+  "name": "python-remove-comment",
+  "displayName": "Remove Comment Python",
+  "description": "python powerfull remove comment python extension",
+  "version": "1.0.0",
+  "publisher": "dwidevelopes",
+  "icon": "public/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dwidevelopes"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "main": "./dist/extension.js",
+  "categories": [
+    "Other",
+    "python",
+    "Tools",
+    "Clean Code"
+  ],
+  "activationEvents": [
+    "onCommand:extension.removePythonComments"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.removePythonComments",
+        "title": "Python: Remove Python Comment (#)",
+        "icon": "public/icon.png"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.removePythonComments",
+          "when": "editorHasSelection && editorLangId == 'python'",
+          "group": "1_modification"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "extension.removePythonComments",
+          "when": "resourceLangId == 'python'",
+          "group": "1_modification"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "extension.removePythonComments",
+          "when": "resourceLangId == 'python'",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "typescript-eslint": "^8.0.0",
+    "eslint": "^9.0.0",
+    "esbuild": "^0.21.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.5.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^5.0.0",
+    "serialize-javascript": "^6.0.0"
+  }
+}
